@@ -1,10 +1,10 @@
 const { User } = require('../models');
 
-const createUser = ({ username, password }) => User.create({ username, password });
+const createUser = ({ email, password }) => User.create({ email, password });
 
-const getByUsername = (username) => User.findOne({ where: { username } });
+const getByEmail = (email) => User.findOne({ where: { email } });
 
 module.exports = {
   createUser,
-  getByUsername,
+  getByEmail,
 };
