@@ -1,12 +1,20 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+/**
+ *
+ * @param {import('sequelize').Sequelize} sequelize
+ * @param {*} DataTypes
+ * @returns
+ */
 module.exports = (sequelize, DataTypes) => {
-  const user = sequelize.define(
+  const User = sequelize.define(
     'User',
     {
-      id:DataTypes.INTEGER,
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
       display_name: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
@@ -17,5 +25,5 @@ module.exports = (sequelize, DataTypes) => {
       tableName: 'users',
     },
   );
-  return user;
+  return User;
 };
