@@ -46,11 +46,11 @@ const getUserById = async (req, res) => {
     const user = await userService.getById(id);
 
     if (!user) {
-      return res.status(400).json({ message: 'User does not exist' });
+      return res.status(404).json({ message: 'User does not exist' });
     }
 
     const { password: _, ...userMinusPassword } = user.dataValues;
-    return res.status(201).json(userMinusPassword);
+    return res.status(200).json(userMinusPassword);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
