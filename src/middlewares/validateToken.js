@@ -10,9 +10,8 @@ const validateToken = (req, res, next) => {
     req.data = payload.data;
     next();
   } catch (error) {
-    res.status(500).json({
-      message: 'Erro ao acessar o endpoint',
-      error: error.message,
+    res.status(401).json({
+      message: 'Expired or invalid token',
     });
   }
 };
