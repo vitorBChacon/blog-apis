@@ -1,6 +1,6 @@
-const { category } = require('../models');
+const { Category } = require('../models');
 
-const createCategory = ({ name }) => category.create({ name });
+const createCategory = ({ name }) => Category.create({ name });
 
 module.exports = {
   createCategory,
