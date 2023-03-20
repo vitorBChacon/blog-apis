@@ -21,7 +21,7 @@ const createUser = async (req, res) => {
   }
 };
 
-const getUsers = async (req, res) => {
+const getUsers = async (_req, res) => {
   try {
     const users = await userService.getAll();
 
@@ -40,7 +40,24 @@ const getUsers = async (req, res) => {
   }
 };
 
+const getUserById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await userService.getById(id);
+
+    if (!user) {
+      return res.status(400).json({ message: 'User does not exist' });
+    }
+
+    const { password: _, ...userMinusPassword } = user.dataValues;
+    return res.status(201).json(userMinusPassword);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   createUser,
   getUsers,
+  getUserById,
 };
