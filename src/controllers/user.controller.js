@@ -15,7 +15,7 @@ const createUser = async (req, res) => {
     }
     const { password: _, ...userMinusPassword } = user.dataValues;
     const token = createToken(userMinusPassword);
-    return res.status(200).json({ token });
+    return res.status(201).json({ token });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
