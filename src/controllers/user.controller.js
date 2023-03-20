@@ -27,7 +27,14 @@ const getUsers = async (req, res) => {
 
     if (!users) throw Error;
 
-    return res.status(200).json(users);
+    const usersWithoutPassword = [];
+
+    users.forEach((element) => {
+      const { password, ...user } = element.dataValues;
+      usersWithoutPassword.push(user);
+    });
+
+    return res.status(200).json(usersWithoutPassword);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
