@@ -4,7 +4,7 @@ const secret = process.env.JWT_SECRET || 'chronoTrigger';
 
 const JWT_CONFIG = {
   algorithm: 'HS256',
-  expiresIn: '15min',
+  expiresIn: '24h',
 };
 
 const createToken = (data) => jwt.sign({ data }, secret, JWT_CONFIG);
