@@ -7,8 +7,11 @@ const createPostCategories = (list) => PostCategory.bulkCreate(list);
 
 const getAll = () => BlogPost.findAll();
 
+const getById = (id) => BlogPost.findOne({ where: { id } });
+
 module.exports = {
   create,
   createPostCategories,
   getAll,
+  getById,
 };

@@ -39,7 +39,25 @@ const getAllPosts = async (_req, res) => {
   }
 };
 
+const getPostById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const post = await postService.getById(id);
+    if (!post) {
+      return res.status(404).json({ message: 'Post does not exist' });
+    }
+    const userData = await userService.getById(post.userId);
+    const { password, ...user } = userData.dataValues;
+    const categories = await categoryService.getAll();
+    const finalPost = { ...post.dataValues, user, categories };
+    return res.status(200).json(finalPost);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   createPost,
   getAllPosts,
+  getPostById,
 };

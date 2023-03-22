@@ -9,5 +9,6 @@ const router = express.Router();
 
 router.post('/', validateToken, validateValues, validateCategoriesId, postController.createPost);
 router.get('/', validateToken, postController.getAllPosts);
+router.get('/:id', validateToken, postController.getPostById);
 
 module.exports = router;
