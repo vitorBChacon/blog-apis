@@ -9,9 +9,12 @@ const getAll = () => User.findAll();
 
 const getById = (id) => User.findOne({ where: { id } });
 
+const deleteUser = (id) => User.destroy({ where: { id } });
+
 module.exports = {
   createUser,
   getByEmail,
   getAll,
   getById,
+  deleteUser,
 };
