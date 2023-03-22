@@ -16,6 +16,7 @@ const createPost = async (req, res) => {
     await postService.createPostCategories(addToPost);
     return res.status(201).json(post.dataValues);
   } catch (error) {
+    console.log(error.message);
     return res.status(500).json({ error: error.message });
   }
 };
@@ -67,9 +68,20 @@ const updatePost = async (req, res, next) => {
   }
 };
 
+const deletePost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await postService.deletePost(id);
+    res.status(204).json();
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   createPost,
   getAllPosts,
   getPostById,
   updatePost,
+  deletePost,
 };

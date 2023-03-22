@@ -11,10 +11,13 @@ const getById = (id) => BlogPost.findOne({ where: { id } });
 
 const updatePost = (title, content, id) => BlogPost.update({ title, content }, { where: { id } });
 
+const deletePost = (id) => BlogPost.destroy({ where: { id } });
+
 module.exports = {
   create,
   createPostCategories,
   getAll,
   getById,
   updatePost,
+  deletePost,
 };

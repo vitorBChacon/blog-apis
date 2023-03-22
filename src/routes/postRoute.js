@@ -4,6 +4,7 @@ const { postController } = require('../controllers');
 const validateValues = require('../middlewares/validatatePostControllerValues');
 const validateCategoriesId = require('../middlewares/validateCategoryId');
 const validateOwnership = require('../middlewares/validateOwnership');
+const validatePostExistence = require('../middlewares/validatePostExistence');
 const validatePutFieldValues = require('../middlewares/validatePutFieldValues');
 const validateToken = require('../middlewares/validateToken');
 
@@ -19,6 +20,12 @@ router.put(
   validateOwnership,
   postController.updatePost,
   postController.getPostById,
-  );
+);
+router.delete(
+  '/:id', validateToken,
+  validatePostExistence,
+  validateOwnership,
+  postController.deletePost,
+);
 
 module.exports = router;
