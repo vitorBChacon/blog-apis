@@ -9,7 +9,6 @@ const login = async (req, res) => {
     if (!verifyRequisitionBody(email, password)) {
       return res.status(400).json({ message: 'Some required fields are missing' });
     }
-    console.log(email);
     const user = await userService.getByEmail(email);
     if (!user || password !== user.password) {
       return res.status(400).json({ message: 'Invalid fields' });

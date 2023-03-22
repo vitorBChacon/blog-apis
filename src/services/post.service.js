@@ -5,7 +5,10 @@ const create = ({ title, content, userId, published, updated }) =>
 
 const createPostCategories = (list) => PostCategory.bulkCreate(list);
 
+const getAll = () => BlogPost.findAll();
+
 module.exports = {
   create,
   createPostCategories,
+  getAll,
 };

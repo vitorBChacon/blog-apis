@@ -1,4 +1,4 @@
-const { postService } = require('../services');
+const { postService, userService } = require('../services');
 
 const createPost = async (req, res) => {
   try {
@@ -20,6 +20,21 @@ const createPost = async (req, res) => {
   }
 };
 
+const getAllPosts = async (_req, res) => {
+  try {
+    const post = await postService.getAll();
+    const finalPost = await Promise.all(post.map(async (e) => {
+      const userData = await userService.getById(e.userId);
+      const postWithUser = { ...e.dataValues, user: userData.dataValues };
+      return postWithUser;
+    }));
+    return res.status(201).json(finalPost);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   createPost,
+  getAllPosts,
 };
