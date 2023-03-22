@@ -1,4 +1,4 @@
-const { postService, userService } = require('../services');
+const { postService, userService, categoryService } = require('../services');
 
 const createPost = async (req, res) => {
   try {
@@ -25,10 +25,15 @@ const getAllPosts = async (_req, res) => {
     const post = await postService.getAll();
     const finalPost = await Promise.all(post.map(async (e) => {
       const userData = await userService.getById(e.userId);
-      const postWithUser = { ...e.dataValues, user: userData.dataValues };
+      const { password, ...user } = userData.dataValues;
+      const categories = await categoryService.getAll();
+      const postWithUser = { 
+        ...e.dataValues,
+        user,
+        categories };
       return postWithUser;
     }));
-    return res.status(201).json(finalPost);
+    return res.status(200).json(finalPost);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
