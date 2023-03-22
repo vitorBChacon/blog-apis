@@ -9,9 +9,12 @@ const getAll = () => BlogPost.findAll();
 
 const getById = (id) => BlogPost.findOne({ where: { id } });
 
+const updatePost = (title, content, id) => BlogPost.update({ title, content }, { where: { id } });
+
 module.exports = {
   create,
   createPostCategories,
   getAll,
   getById,
+  updatePost,
 };
